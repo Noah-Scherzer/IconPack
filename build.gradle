@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Bitte verwende eine aktuelle Version des Android Gradle Plugin
+        // (z. B. 8.1.1 oder eine andere passende Version)
+        classpath("com.android.tools.build:gradle:8.1.1")
+    }
+}
+
+// Das brauchen wir, damit jede Sub-Projekt (z. B. :app) auf google() und mavenCentral() zugreifen kann
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
