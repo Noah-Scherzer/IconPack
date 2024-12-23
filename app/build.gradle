@@ -1,37 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    // Neu ab AGP 8: namespace ist Pflicht
-    namespace "com.example.iconpack"
+    namespace "com.example.myiconpack"   // <- Hier definiert
     compileSdk 33
 
     defaultConfig {
-        // Die App-ID für den finalen APK-Namen
-        applicationId "com.example.iconpack"
+        applicationId "com.example.myiconpack"
         minSdk 21
         targetSdk 33
         versionCode 1
         versionName "1.0"
     }
-
-    // (Optional) Signing, falls du einen Release-Keystore einsetzen möchtest
-    // signingConfigs {
-    //     release {
-    //         storeFile file("keystore.jks")
-    //         storePassword "STORE_PASSWORD"
-    //         keyAlias "KEY_ALIAS"
-    //         keyPassword "KEY_PASSWORD"
-    //     }
-    // }
-    // buildTypes {
-    //     release {
-    //         signingConfig signingConfigs.release
-    //         minifyEnabled false
-    //     }
-    // }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    // ggf. weitere Abhängigkeiten
 }
