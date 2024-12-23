@@ -1,17 +1,2 @@
-pluginManagement {
-    repositories {
-        // Diese Repositories braucht Gradle, um das Android-Plugin zu finden.
-        google()
-        mavenCentral()
-        gradlePluginPortal() 
-    }
-    plugins {
-        // Falls du hier eine Plugin-Version direkt deklarieren möchtest,
-        // z.B.:
-        // id("com.android.application") version "8.1.1"
-    }
-}
-
-// Danach kannst du den Namen setzen und Module einbinden
 rootProject.name = "IconPack"
 include(":app")
