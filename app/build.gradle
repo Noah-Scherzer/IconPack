@@ -1,5 +1,8 @@
 plugins {
-    id 'com.android.application'
+    // Hier definierst du das Android-Plugin inkl. Version
+    id 'com.android.application' version '8.1.1'
+    // Falls du Kotlin verwendest, ggf.:
+    // id 'kotlin-android' version '1.8.0'
 }
 
 android {
@@ -13,27 +16,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    // release/signingConfig etc. hier
+}
 
-    signingConfigs {
-        release {
-            storeFile file("keystore.jks")
-            storePassword "DEIN_STORE_PASSWORT"
-            keyAlias "DEIN_KEY_ALIAS"
-            keyPassword "DEIN_KEY_PASSWORT"
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-            minifyEnabled false
-        }
-        debug {
-            applicationIdSuffix ".debug"
-            debuggable true
-        }
-    }
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    // ggf. weitere Abhängigkeiten
 }
