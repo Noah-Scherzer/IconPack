@@ -8,27 +8,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # 1) Quellcode auschecken
+      # 1) Code aus dem Repo auschecken
       - name: Check out code
         uses: actions/checkout@v3
 
-      # 2) Java (JDK) einrichten - ggf. Version anpassen (z.B. 11 oder 17)
+      # 2) Java (JDK 17) einrichten
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      # 3) Gradle Wrapper ausführbar machen (falls du gradlew im Repo hast)
+      # 3) Android SDK installieren
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: "33.0.0"
 
+      # 4) Gradle über apt installieren
+      - name: Install Gradle
+        run: sudo apt-get update && sudo apt-get install -y gradle
 
-      # 4) Projekt bauen (assembleRelease kompiliert die Release-Variante)
+      # 5) Build mit System-Gradle statt Wrapper
       - name: Build with Gradle
-        run: ./gradlew assembleRelease
+        run: gradle assembleRelease
 
-      # 5) Das fertige APK hochladen
+      # 6) APK als Artifact hochladen
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
