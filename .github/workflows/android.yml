@@ -22,8 +22,7 @@ jobs:
           java-version: 17
 
       # 3) Gradle Wrapper ausführbar machen (falls du gradlew im Repo hast)
-      - name: Grant Gradlew Execute Permission
-        run: chmod +x gradlew
+
 
       # 4) Projekt bauen (assembleRelease kompiliert die Release-Variante)
       - name: Build with Gradle
