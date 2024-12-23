@@ -8,25 +8,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      # Schritt 1: Code aus dem Repo laden
-      - name: Check out code
-        uses: actions/checkout@v2
 
-      # Schritt 2: Java 17 einrichten (du kannst auch Java 11 oder 8 nehmen)
+    steps:
+      # 1) Quellcode auschecken
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) Java (JDK) einrichten - ggf. Version anpassen (z.B. 11 oder 17)
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      # Schritt 3: Gradle-Build
+      # 3) Gradle Wrapper ausführbar machen (falls du gradlew im Repo hast)
+      - name: Grant Gradlew Execute Permission
+        run: chmod +x gradlew
+
+      # 4) Projekt bauen (assembleRelease kompiliert die Release-Variante)
       - name: Build with Gradle
         run: ./gradlew assembleRelease
 
-      # Schritt 4: Release-APK als Build-Artefakt hochladen
-- name: Upload APK
-  uses: actions/upload-artifact@v3
-  with:
-    name: MyIconPack-APK
-    path: app/build/outputs/apk/release/app-release.apk
+      # 5) Das fertige APK hochladen
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: MyIconPack-APK
+          path: app/build/outputs/apk/release/app-release.apk
