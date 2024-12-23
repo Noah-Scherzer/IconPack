@@ -8,35 +8,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      # 1) Code auschecken
       - name: Check out code
         uses: actions/checkout@v3
 
-      # 2) Java (JDK 17) installieren
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      # 3) Android SDK installieren
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
           api-level: 33
           build-tools: "33.0.0"
 
-      # 4) System-Gradle über apt installieren
-      - name: Install Gradle
-        run: sudo apt-get update && sudo apt-get install -y gradle
+      # Neuere Gradle-Version via SDKMAN
+      - name: Install SDKMAN
+        run: |
+          curl -s "https://get.sdkman.io" | bash
+          echo "sdkman_auto_answer=true" >> $HOME/.sdkman/etc/config
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install gradle 8.1.1
 
-      # 5) Build Release-APK (nutzt den systemweiten Gradle)
-      - name: Build with Gradle
+      # Build mit systemweit installiertem Gradle
+      - name: Build
         run: gradle assembleRelease
 
-      # 6) APK hochladen
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
