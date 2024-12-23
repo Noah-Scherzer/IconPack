@@ -1,1 +1,6 @@
-
+<resources>
+    <!-- Beispiel-Eintrag für WhatsApp: -->
+    <item
+        component="ComponentInfo{com.whatsapp/com.whatsapp.HomeActivity}"
+        drawable="ic_com_whatsapp" />
+</resources>
